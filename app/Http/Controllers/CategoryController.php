@@ -1,0 +1,96 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class CategoryController extends Controller
+{
+    // Mendapatkan semua kategori
+    public function index()
+    {
+        $categories = DB::table('categories')
+        ->leftJoin('companies', 'categories.company_id', '=', 'companies.id')
+        ->select('categories.id', 'categories.name', 'categories.description', 'companies.name as company_name')
+        ->get();
+
+    return view('categories.index', compact('categories'));
+    }
+
+    // Mendapatkan kategori berdasarkan ID
+    public function show($id)
+    {
+        $category = DB::table('categories')->where('id', $id)->first();
+
+        if (!$category) {
+            return redirect()->route('categories.index')->with('error', 'Kategori tidak ditemukan');
+        }
+
+        return view('categories.show', ['category' => $category]);
+    }
+
+    // Menampilkan form untuk membuat kategori baru
+    public function create()
+    {
+        $companies = DB::table('companies')->get();
+        return view('categories.create', compact('companies'));    }
+
+    // Menyimpan kategori baru
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'company_id' => 'required|integer',
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'company_id' => $request->input('company_id'),
+        ]);
+
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil dibuat.');
+    }
+
+    // Menampilkan form untuk mengedit kategori
+    public function edit($id)
+    {
+        $category = DB::table('categories')->where('id', $id)->first();
+
+        if (!$category) {
+            return redirect()->route('categories.index')->with('error', 'Kategori tidak ditemukan');
+        }
+
+        return view('categories.edit', ['category' => $category]);
+    }
+
+    // Mengupdate kategori yang ada
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'company_id' => 'required|integer',
+        ]);
+
+        DB::table('categories')
+            ->where('id', $id)
+            ->update([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'company_id' => $request->input('company_id'),
+            ]);
+
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil diupdate.');
+    }
+
+    // Menghapus kategori
+    public function destroy($id)
+    {
+        DB::table('categories')->where('id', $id)->delete();
+
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus.');
+    }
+}
