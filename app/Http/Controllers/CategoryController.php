@@ -10,12 +10,20 @@ class CategoryController extends Controller
     // Mendapatkan semua kategori
     public function index()
     {
-        $categories = DB::table('categories')
-        ->leftJoin('companies', 'categories.company_id', '=', 'companies.id')
-        ->select('categories.id', 'categories.name', 'categories.description', 'companies.name as company_name')
-        ->get();
+        // Menulis query SQL mentah dengan pengurutan
+        $query = '
+           SELECT categories.id, categories.name, categories.description, companies.name AS company_name
+            FROM categories
+            LEFT JOIN companies ON categories.company_id = companies.id
+            WHERE categories.deleted_at IS NULL
+            ORDER BY categories.id DESC LIMIT 10;
 
-    return view('categories.index', compact('categories'));
+        ';
+    
+        // Menjalankan query SQL mentah
+        $categories = DB::select($query);
+
+        return view('categories.index', compact('categories'));
     }
 
     // Mendapatkan kategori berdasarkan ID
