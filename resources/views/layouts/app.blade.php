@@ -43,7 +43,7 @@
         <!-- Sidebar -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="#" class="brand-link">
+            <a href="{{ route('home') }}" class="nav-link">
                 <span class="brand-text font-weight-light">APP KASIR</span>
             </a>
 
@@ -54,17 +54,21 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
                             <a href="{{ route('categories.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-plus"></i>
+                                <i class="nav-icon fas fa-tags"></i>
                                 <p>Kategori</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('companies.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-plus"></i>
+                                <i class="nav-icon fas fa-building"></i>
                                 <p>Company</p>
                             </a>
                         </li>
-                            </ul>
+                        <li class="nav-item">
+                            <a href="{{ route('customers.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>Customer</p>
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -79,11 +83,10 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            {{-- ISI UNTUK HEADER --}}
                             <h1 class="m-0">@yield('title', '')</h1>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- Main content -->
             <section class="content">
@@ -104,9 +107,16 @@
         </footer>
     </div>
 
-    <!-- AdminLTE JS -->
-    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <!-- jQuery (required for AdminLTE) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- AdminLTE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
+    <!-- Optional Script to Initialize Sidebar Toggle (if necessary) -->
+    <script>
+        $(document).ready(function () {
+            $('[data-widget="pushmenu"]').PushMenu();
+        });
+    </script>
 </body>
 </html>

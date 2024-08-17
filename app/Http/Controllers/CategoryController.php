@@ -65,13 +65,21 @@ class CategoryController extends Controller
     // Menampilkan form untuk mengedit kategori
     public function edit($id)
     {
+        // Retrieve the category by ID
         $category = DB::table('categories')->where('id', $id)->first();
-
+    
         if (!$category) {
             return redirect()->route('categories.index')->with('error', 'Kategori tidak ditemukan');
         }
-
-        return view('categories.edit', ['category' => $category]);
+    
+        // Retrieve all companies
+        $companies = DB::table('companies')->get();
+    
+        // Pass both the category and companies to the view
+        return view('categories.edit', [
+            'category' => $category,
+            'companies' => $companies
+        ]);
     }
 
     // Mengupdate kategori yang ada
