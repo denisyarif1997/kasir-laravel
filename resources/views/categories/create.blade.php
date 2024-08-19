@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-<link rel="stylesheet" href="{{ asset('css/form.css') }}">
+{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"> --}}
+{{-- <link rel="stylesheet" href="{{ asset('css/form.css') }}"> --}}
 
 <div class="container">
     <div class="row justify-content-center">
@@ -36,17 +36,15 @@
                         </div>
                         <div class="mb-3">
                             <label for="company_id" class="form-label">Perusahaan</label>
-                            <select class="form-select" id="company_id" name="company_id" required>
+                            <select class="form-control" id="company_id" name="company_id" required>
                                 <option value="" disabled selected>Pilih Perusahaan</option>
                                 @foreach($companies as $company)
                                     <option value="{{ $company->id }}">{{ $company->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ route('categories.index') }}" class="btn btn-secondary">Kembali</a>
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{{ route('categories.index') }}" class="btn btn-secondary">Back</a>
                     </form>
                 </div>
             </div>

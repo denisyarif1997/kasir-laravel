@@ -3,7 +3,14 @@
 
 @section('content')
 <div class="container">
-    <h1>Add New Customer</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-success text-white">
+                        <h1 class="h4 mb-0">Tambah Customer</h1>
+                    </div>
+                    <div class="card-body">
 
     <form action="{{ route('customers.store') }}" method="POST">
         @csrf
@@ -33,7 +40,7 @@
 
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}">
+            <input type="number" class="form-control" id="phone" name="phone" value="{{ old('phone') }}">
             @error('phone')
                 <div class="text-danger">{{ $message }}</div>
             @enderror

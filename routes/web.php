@@ -16,13 +16,9 @@ use App\Http\Controllers\CustomerController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('layouts\app');
+Route::get('/', function () {return view('layouts\app');
 })->name('home');
 
-Route::fallback(function () {
-    return view('default'); // 'default' adalah nama view yang menggunakan 'layouts.app'
-});
 
 
 

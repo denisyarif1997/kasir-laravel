@@ -44,7 +44,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{ route('home') }}" class="nav-link">
-                <span class="brand-text font-weight-light">APP KASIR</span>
+                <span class="brand-text font-weight-light"><h1>APP CRUD</h1> </span>
             </a>
 
             <!-- Sidebar -->

@@ -17,7 +17,7 @@
 
     <a href="{{ route('customers.create') }}" class="btn btn-primary mb-3">Add New Customer</a>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>

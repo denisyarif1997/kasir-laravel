@@ -2,10 +2,16 @@
 
 @section('content')
 <div class="container">
-    <h1>Add Company</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h1 class="h4 mb-0">Tambah Company</h1>
+                </div>
+                <div class="card-body">
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
+            @if ($errors->any())
+            <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>

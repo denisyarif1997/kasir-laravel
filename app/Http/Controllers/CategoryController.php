@@ -17,7 +17,6 @@ class CategoryController extends Controller
             LEFT JOIN companies ON categories.company_id = companies.id
             WHERE categories.deleted_at IS NULL
             ORDER BY categories.id DESC LIMIT 10;
-
         ';
     
         // Menjalankan query SQL mentah
@@ -103,10 +102,21 @@ class CategoryController extends Controller
     }
 
     // Menghapus kategori
-    public function destroy($id)
-    {
-        DB::table('categories')->where('id', $id)->delete();
+   public function destroy($id)
+{
+    // Perform a soft delete by setting the deleted_at timestamp
+    $updated = DB::update(
+        'UPDATE categories SET deleted_at = ? WHERE id = ?',
+        [now(), $id]
+    );
 
-        return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus.');
+    if ($updated) {
+        return redirect()->route('categories.index')->with('success', 'Category successfully deleted.');
+    } else {
+        return redirect()->route('categories.index')->with('error', 'Category not found.');
     }
+}
+
+
+    
 }
