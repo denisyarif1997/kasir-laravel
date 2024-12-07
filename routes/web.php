@@ -47,19 +47,19 @@ Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('custom
 
 
 
+
+
+
 // testing db
-// Route::get('/test-categories-connection', function () {
-//     try {
-//         $categories = DB::table('categories')->get();
-//         return response()->json([
-//             'success' => true,
-//             'data' => $categories,
-//         ]);
-//     } catch (\Exception $e) {
-//         return response()->json([
-//             'success' => false,
-//             'message' => $e->getMessage(),
-//         ], 500);
-//     }
-// });
+use Illuminate\Support\Facades\DB;
+
+Route::get('/test-db', function () {
+    try {
+        DB::connection()->getPdo();
+        return "Database connection is successful!";
+    } catch (\Exception $e) {
+        return "Could not connect to the database. Error: " . $e->getMessage();
+    }
+});
+
 

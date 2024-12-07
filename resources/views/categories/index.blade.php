@@ -20,6 +20,8 @@
                 <th>Nama</th>
                 <th>Deskripsi</th>
                 <th>Perusahaan</th>
+                <th>Di Buat</th>
+                <th>Di Update</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -30,6 +32,8 @@
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->description }}</td>
                 <td>{{ $category->company_name }}</td>
+                <td>{{ $category->created_at }}</td>
+                <td>{{ $category->updated_at }}</td>
                 <td>
                     <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">

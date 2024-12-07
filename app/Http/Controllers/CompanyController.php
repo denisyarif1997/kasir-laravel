@@ -20,7 +20,7 @@ class CompanyController extends Controller
             SELECT *
             FROM 
             companies WHERE deleted_at is NULL 
-            ORDER BY id ASC LIMIT 10
+            ORDER BY id desc
         ';
     
         // Menjalankan query SQL mentah
@@ -76,6 +76,8 @@ class CompanyController extends Controller
             'phone' => 'nullable|string|max:15',
             'email' => 'nullable|email|max:255',
         ]);
+
+        $validated['updated_at'] = now();
 
         $affected = DB::table('companies')
             ->where('id', $id)

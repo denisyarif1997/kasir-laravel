@@ -26,6 +26,8 @@
                 <th>Address</th>
                 <th>Description</th>
                 <th>Company Name</th>
+                <th>Di Buat</th>
+                <th>Di Update</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -38,6 +40,8 @@
                     <td>{{ $customer->address }}</td>
                     <td>{{ $customer->description }}</td>
                     <td>{{ $customer->company_name }}</td>
+                    <td>{{ $customer->created_at }}</td>
+                    <td>{{ $customer->updated_at }}</td>
                     <td>
                         <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" style="display:inline;">

@@ -12,11 +12,11 @@ class CategoryController extends Controller
     {
         // Menulis query SQL mentah dengan pengurutan
         $query = '
-           SELECT categories.id, categories.name, categories.description, companies.name AS company_name
+          SELECT categories.id, categories.name, categories.description, companies.name AS company_name, categories.created_at ,categories.updated_at 
             FROM categories
             LEFT JOIN companies ON categories.company_id = companies.id
             WHERE categories.deleted_at IS NULL
-            ORDER BY categories.id DESC LIMIT 10;
+            ORDER BY categories.id DESC LIMIT 10
         ';
     
         // Menjalankan query SQL mentah
@@ -96,6 +96,7 @@ class CategoryController extends Controller
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
                 'company_id' => $request->input('company_id'),
+                'updated_at' => now(),
             ]);
 
         return redirect()->route('categories.index')->with('success', 'Kategori berhasil diupdate.');
