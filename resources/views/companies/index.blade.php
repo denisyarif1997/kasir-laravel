@@ -14,10 +14,10 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Address</th>
-                <th>Phone</th>
+                <th>Nama</th>
+                <th>Deskripsi</th>
+                <th>Alamat</th>
+                <th>No telepon</th>
                 <th>Email</th>
                 <th>Di Buat</th>
                 <th>Di Update</th>

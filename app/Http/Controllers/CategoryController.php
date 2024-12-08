@@ -8,22 +8,40 @@ use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
     // Mendapatkan semua kategori
-    public function index()
+    public function index(Request $request)
     {
-        // Menulis query SQL mentah dengan pengurutan
+        $perPage = 10; // Item per halaman
+        $page = $request->get('page', 1); // Mengambil halaman dari query string, default ke halaman 1
+        $offset = ($page - 1) * $perPage;
+    
+        // Menulis query SQL mentah dengan LIMIT dan OFFSET untuk pagination
         $query = '
-          SELECT categories.id, categories.name, categories.description, companies.name AS company_name, categories.created_at ,categories.updated_at 
+            SELECT categories.id, categories.name, categories.description, companies.name AS company_name, categories.created_at, categories.updated_at
             FROM categories
             LEFT JOIN companies ON categories.company_id = companies.id
             WHERE categories.deleted_at IS NULL
-            ORDER BY categories.id DESC LIMIT 10
+            ORDER BY categories.id DESC
+            LIMIT :limit OFFSET :offset
         ';
     
-        // Menjalankan query SQL mentah
-        $categories = DB::select($query);
-
-        return view('categories.index', compact('categories'));
+        // Menjalankan query SQL dengan parameter untuk menghindari SQL Injection
+        $categories = DB::select($query, [
+            'limit' => $perPage,
+            'offset' => $offset,
+        ]);
+    
+        // Hitung jumlah total data untuk keperluan navigasi halaman
+        $total = DB::table('categories')
+            ->leftJoin('companies', 'categories.company_id', '=', 'companies.id')
+            ->whereNull('categories.deleted_at')
+            ->count();
+    
+        // Buat variabel untuk mengatur total halaman
+        $totalPages = ceil($total / $perPage);
+    
+        return view('categories.index', compact('categories', 'totalPages', 'page'));
     }
+    
 
     // Mendapatkan kategori berdasarkan ID
     public function show($id)

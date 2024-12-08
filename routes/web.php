@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductController;
 
 
 /*
@@ -43,6 +44,8 @@ Route::get('/customers/{id}/edit', [CustomerController::class, 'edit'])->name('c
 Route::put('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
 Route::delete('/customers/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('customers.show');
+
+Route::resource('products', ProductController::class);
 
 
 

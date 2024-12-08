@@ -27,24 +27,36 @@
         </thead>
         <tbody>
             @foreach($categories as $category)
-            <tr>
-                <td>{{ $category->id }}</td>
-                <td>{{ $category->name }}</td>
-                <td>{{ $category->description }}</td>
-                <td>{{ $category->company_name }}</td>
-                <td>{{ $category->created_at }}</td>
-                <td>{{ $category->updated_at }}</td>
-                <td>
-                    <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                    </form>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ $category->id }}</td>
+                    <td>{{ $category->name }}</td>
+                    <td>{{ $category->description }}</td>
+                    <td>{{ $category->company_name }}</td>
+                    <td>{{ $category->created_at }}</td>
+                    <td>{{ $category->updated_at }}</td>
+                    <td>
+                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
+
+    <!-- Pagination Manual -->
+    <div class="d-flex justify-content-between">
+        @if ($page > 1)
+            <a href="{{ route('categories.index', ['page' => $page - 1]) }}" class="btn btn-secondary">Sebelumnya</a>
+        @endif
+
+        @if ($page < $totalPages)
+            <a href="{{ route('categories.index', ['page' => $page + 1]) }}" class="btn btn-secondary">Selanjutnya</a>
+        @endif
+    </div>
 </div>
+
 @endsection

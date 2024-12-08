@@ -11,7 +11,11 @@ class CustomerController extends Controller
     {
         // Fetch all customers
         $customers = DB::select(
-            'select customers.id, customers.name, customers.phone, customers.address, customers.description, companies.name as company_name , customers.created_at, customers.updated_at from customers left join companies on customers.company_id = companies.id where customers.deleted_at is null order by customers.id desc'
+            'select customers.id, customers.name, 
+            customers.phone, customers.address, 
+            customers.description, companies.name as company_name , 
+            customers.created_at, customers.updated_at from customers 
+            left join companies on customers.company_id = companies.id where customers.deleted_at is null order by customers.id desc'
         );
     
         return view('customers.index', compact('customers'));
